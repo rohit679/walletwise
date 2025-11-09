@@ -1,6 +1,6 @@
 import express, { NextFunction } from "express";
 import bodyParser from "body-parser";
-import createError from "http-errors-lite";
+import createError from "http-errors";
 import {StatusCodes} from "http-status-codes";
 import cors from "cors";
 import { Request, Response } from 'express';

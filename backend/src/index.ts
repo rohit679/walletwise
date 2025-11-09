@@ -1,15 +1,27 @@
-import express, { Express, Request, Response } from 'express';
+import { config } from "dotenv";
+import { finishApp, createAnApp } from "./app";
+import { getSecret } from "./configuration";
+import { connectMongo } from "./utils/connect-db";
 
-const app: Express = express();
-const port = process.env.PORT || 3000;
+(async () => {
+  config({ path: ".env" });
+  connectMongo();
 
-app.use(express.json());
+  const { port } = getSecret();
+  const app = createAnApp();
 
-// Basic route
-app.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Welcome to WalletWise Backend!' });
-});
+  app.get("/health-check", (req, res) => {
+    res.send("App is healthy 💚");
+  });
 
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+  finishApp(app);
+
+  try {
+    await app.listen(port, () => {
+      console.log(`Yes, the app is up and running at ${port} 🎉`);
+    });
+  } catch (err: any) {
+    console.log(err.message);
+    process.exit(1);
+  }
+})();
