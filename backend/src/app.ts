@@ -26,7 +26,7 @@ export const notFoundHandler = (req: Request, res: Response, next: NextFunction)
 
 export const errorHandler = (err: any, req: Request, res: Response, _next: NextFunction) => {
   res.status(err.statusCode || 500).send({
-    msg: 'Something unwanted occurred ...',
+    message: 'Something unwanted occurred ...',
     error: err.message,
   });
 };
