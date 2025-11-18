@@ -2,6 +2,7 @@ import { config } from 'dotenv';
 import { finishApp, createAnApp } from './app';
 import { getSecret } from './configuration';
 import { connectMongo } from './utils/connect-db';
+import { authRouter } from './modules/auth/auth.routes';
 
 (async () => {
   config({ path: '.env' });
@@ -13,6 +14,9 @@ import { connectMongo } from './utils/connect-db';
   app.get('/health-check', (req, res) => {
     res.send('App is healthy 💚');
   });
+
+  // Routes
+  app.use('/auth', authRouter);
 
   finishApp(app);
 
