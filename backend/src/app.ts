@@ -4,11 +4,16 @@ import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
 import cors from 'cors';
 import { Request, Response } from 'express';
+import limitRate from 'express-rate-limit';
 
 export const createAnApp = () => {
   const app = express();
   app.use(express.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(limitRate({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+  }));
   app.use(
     cors({
       origin: ['http://localhost:3000'],
