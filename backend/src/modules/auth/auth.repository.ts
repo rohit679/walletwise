@@ -13,8 +13,30 @@ export const AuthRepository = {
     const doc = await UserModel.create(user);
     return doc.toObject();
   },
-  async updateUser(id: string, update: Partial<UserDoc>) {
-    const user = await UserModel.findByIdAndUpdate(id, update, { new: true }).lean();  
+  async updateUser(id: any, update: Partial<UserDoc>) {
+    const setFields: Record<string, any> = {};
+    const unsetFields: Record<string, ''> = {};
+
+    if (update && typeof update === 'object') {
+      for (const [key, value] of Object.entries(update as Record<string, any>)) {
+        if (value === undefined) {
+          unsetFields[key] = '';
+        } else {
+          setFields[key] = value;
+        }
+      }
+    }
+
+    const updateQuery: Record<string, any> = {};
+    if (Object.keys(setFields).length) updateQuery.$set = setFields;
+    if (Object.keys(unsetFields).length) updateQuery.$unset = unsetFields;
+
+    // If updateQuery is empty nothing to do
+    if (!Object.keys(updateQuery).length) {
+      return await UserModel.findById(id).lean();
+    }
+
+    const user = await UserModel.findByIdAndUpdate(id, updateQuery, { new: true }).lean();
     return user;
-  }
+  },
 };
