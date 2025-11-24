@@ -8,15 +8,17 @@ const userSchema = new Schema(
     name: { type: String, required: true },
     settings: {
       currency: { type: String, default: 'INR' },
-      theme: { type: String, default: 'system' }
+      theme: { type: String, default: 'system' },
     },
-    refreshToken: { type: String, default: null }
+    refreshToken: { type: String },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Number },
   },
   { strict: false, timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("passwordHash")) return next();
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('passwordHash')) return next();
 
   this.passwordHash = await bcrypt.hash(this.passwordHash, 10);
   next();
