@@ -6,15 +6,13 @@ export const AuthController = {
   async register(req: Request, res: Response) {
     const parse = RegisterSchema.safeParse(req.body);
     if (!parse.success) {
-      return res
-        .status(400)
-        .json({
-          error: {
-            code: 'VALIDATION_ERROR',
-            message: 'Invalid input',
-            details: parse.error.flatten(),
-          },
-        });
+      return res.status(400).json({
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Invalid input',
+          details: parse.error.flatten(),
+        },
+      });
     }
     const result = await AuthService.register(
       parse.data as { name: string; email: string; passwordHash: string }
@@ -29,15 +27,13 @@ export const AuthController = {
   async login(req: Request, res: Response) {
     const parse = LoginSchema.safeParse(req.body);
     if (!parse.success) {
-      return res
-        .status(400)
-        .json({
-          error: {
-            code: 'VALIDATION_ERROR',
-            message: 'Invalid input',
-            details: parse.error.flatten(),
-          },
-        });
+      return res.status(400).json({
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Invalid input',
+          details: parse.error.flatten(),
+        },
+      });
     }
     const result = await AuthService.login(parse.data as { email: string; passwordHash: string });
     const options = {
@@ -59,15 +55,13 @@ export const AuthController = {
   async forgotPassword(req: Request, res: Response) {
     const parse = ForgotPasswordSchema.safeParse(req.body);
     if (!parse.success) {
-      return res
-        .status(400)
-        .json({
-          error: {
-            code: 'VALIDATION_ERROR',
-            message: 'Invalid input',
-            details: parse.error.flatten(),
-          },
-        });
+      return res.status(400).json({
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Invalid input',
+          details: parse.error.flatten(),
+        },
+      });
     }
     const { email } = req.body;
     await AuthService.forgotPassword(email);

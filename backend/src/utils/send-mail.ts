@@ -18,7 +18,7 @@ export async function sendEmail(options: EmailOptions) {
     auth: {
       user: smtp?.user,
       pass: smtp?.pass,
-    }
+    },
   });
 
   const templatePath = path.join(__dirname, '../templates', `${options.template}.html`);
@@ -34,6 +34,6 @@ export async function sendEmail(options: EmailOptions) {
     from: emailFrom,
     to: options.to,
     subject: options.subject,
-    html
+    html,
   });
 }

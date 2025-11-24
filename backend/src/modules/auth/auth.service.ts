@@ -8,7 +8,7 @@ import crypto from 'crypto';
 
 export const AuthService = {
   async register(input: { name: string; email: string; passwordHash: string }) {
-    const {baseUrl} = getSecret();
+    const { baseUrl } = getSecret();
     const existing = await AuthRepository.findByEmail(input.email);
     if (existing) {
       throw createError(409, 'Email already in use');
@@ -38,7 +38,11 @@ export const AuthService = {
     }
 
     const { accessToken, refreshToken } = await this.generateAccessAndRefereshTokens(user);
-    return { accessToken, refreshToken, user: { id: user._id, name: user.name, email: user.email } };
+    return {
+      accessToken,
+      refreshToken,
+      user: { id: user._id, name: user.name, email: user.email },
+    };
   },
 
   async forgotPassword(email: string) {
@@ -69,7 +73,7 @@ export const AuthService = {
     });
   },
 
-  async resetPassword(input: { email: string; token: string, newPassword: string }) {
+  async resetPassword(input: { email: string; token: string; newPassword: string }) {
     const { baseUrl } = getSecret();
     const user = await AuthRepository.findByEmail(input.email);
     if (
@@ -102,16 +106,17 @@ export const AuthService = {
 
   async generateAccessAndRefereshTokens(user) {
     try {
-      const { accessTokenSecret, accessTokenExpiresIn, refreshTokenExpiresIn, refreshTokenSecret } = getSecret();
+      const { accessTokenSecret, accessTokenExpiresIn, refreshTokenExpiresIn, refreshTokenSecret } =
+        getSecret();
       if (!accessTokenSecret) {
-        throw new Error("Access token secret is not defined");
+        throw new Error('Access token secret is not defined');
       }
-      
+
       const accessToken = (jwt as any).sign(
         {
           id: user._id,
           email: user.email,
-          name: user.name
+          name: user.name,
         },
         accessTokenSecret,
         {
@@ -130,10 +135,7 @@ export const AuthService = {
       await AuthRepository.updateUser(user._id, { refreshToken: refreshToken });
       return { accessToken, refreshToken };
     } catch (err) {
-      throw createError(
-        500,
-        "Error while generating referesh and access token"
-      );
+      throw createError(500, 'Error while generating referesh and access token');
     }
-  }
+  },
 };
