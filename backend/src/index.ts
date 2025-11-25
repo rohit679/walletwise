@@ -3,6 +3,7 @@ import { finishApp, createAnApp } from './app';
 import { getSecret } from './configuration';
 import { connectMongo } from './utils/connect-db';
 import { authRouter } from './modules/auth/auth.routes';
+import { userRouter } from './modules/auth/user.routes';
 
 (async () => {
   config({ path: '.env' });
@@ -17,6 +18,7 @@ import { authRouter } from './modules/auth/auth.routes';
 
   // Routes
   app.use('/auth', authRouter);
+  app.use('/users', userRouter);
 
   finishApp(app);
 

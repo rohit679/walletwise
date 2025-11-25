@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { AuthController } from './auth.controller';
+import { httpHandler } from '../../utils/http-handler';
+import { authMiddleware } from '../../middleware/authMiddleware';
 
 export const authRouter = Router();
-authRouter.post('/register', (req, res, next) => AuthController.register(req, res).catch(next));
-authRouter.post('/login', (req, res, next) => AuthController.login(req, res).catch(next));
-authRouter.post('/forgot-password', (req, res, next) =>
-  AuthController.forgotPassword(req, res).catch(next)
-);
-authRouter.post('/reset-password', (req, res, next) =>
-  AuthController.resetPassword(req, res).catch(next)
-);
+authRouter.post('/register', httpHandler(AuthController.register));
+authRouter.post('/login', httpHandler(AuthController.login));
+authRouter.post('/forgot-password', httpHandler(AuthController.forgotPassword));
+authRouter.post('/reset-password', httpHandler(AuthController.resetPassword));
+authRouter.post('/logout', authMiddleware, httpHandler(AuthController.logout));
+authRouter.post('/refresh-token', httpHandler(AuthController.refreshToken));

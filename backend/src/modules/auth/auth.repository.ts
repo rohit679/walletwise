@@ -1,4 +1,5 @@
 import { UserModel, type UserDoc } from './user.model';
+import { BlackListTokenModel } from './blacklistToken.model';
 
 export const AuthRepository = {
   async findById(id: string) {
@@ -39,4 +40,7 @@ export const AuthRepository = {
     const user = await UserModel.findByIdAndUpdate(id, updateQuery, { new: true }).lean();
     return user;
   },
+  async blacklistToken(token: string, expiresAt: number) {
+    await BlackListTokenModel.create({ token, expiresAt: new Date(expiresAt) });
+  }
 };

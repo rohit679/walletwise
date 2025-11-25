@@ -89,4 +89,44 @@ export const AuthController = {
       message: 'Password reset successful, you can now log in with your new password',
     });
   },
+
+  async logout(req: Request, res: Response) {
+    await AuthService.logout((req as any).user);
+    res
+      .status(200)
+      .clearCookie('accessToken')
+      .clearCookie('refreshToken')
+      .send({
+        error: false,
+        message: 'User logged out successfully',
+      });
+  },
+
+  async refreshToken(req: Request, res: Response) {
+    const refreshToken = req.cookies?.refreshToken || req.header('x-refresh-token');
+    if (!refreshToken || typeof refreshToken !== 'string') {
+      return res.status(400).json({
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Refresh token is required',
+        },
+      });
+    }
+
+    const result = await AuthService.refreshToken(refreshToken);
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    res
+      .status(200)
+      .cookie('accessToken', result.accessToken, options)
+      .cookie('refreshToken', result.refreshToken, options)
+      .send({
+        error: false,
+        data: result,
+        message: 'Token refreshed successfully',
+      });
+  },
 };

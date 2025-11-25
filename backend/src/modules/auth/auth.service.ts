@@ -104,6 +104,35 @@ export const AuthService = {
     });
   },
 
+  async logout(user: any) {
+    const { id, token  } = user as any;
+    const decodedToken: any = jwt.decode(token);
+    const expiresAt = decodedToken.exp * 1000;
+    await AuthRepository.blacklistToken(token, expiresAt);
+    await AuthRepository.updateUser(id, { refreshToken: null });
+  },
+
+  async refreshToken(oldRefreshToken: string) {
+    const { refreshTokenSecret } = getSecret();
+    let decodedToken: any;
+    try {
+      decodedToken = jwt.verify(oldRefreshToken, refreshTokenSecret);
+    } catch (err) {
+      throw createError(401, 'Invalid refresh token');
+    }
+
+    const user = await AuthRepository.findById(decodedToken.id);
+    if (!user || user.refreshToken !== oldRefreshToken) {
+      throw createError(401, 'Invalid refresh token');
+    }
+
+    const { accessToken, refreshToken } = await this.generateAccessAndRefereshTokens(user);
+    return {
+      accessToken,
+      refreshToken,
+    };
+  },
+
   async generateAccessAndRefereshTokens(user) {
     try {
       const { accessTokenSecret, accessTokenExpiresIn, refreshTokenExpiresIn, refreshTokenSecret } =
