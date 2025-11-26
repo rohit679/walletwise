@@ -5,8 +5,10 @@ import { StatusCodes } from 'http-status-codes';
 import cors from 'cors';
 import { Request, Response } from 'express';
 import limitRate from 'express-rate-limit';
+import { getSecret } from './configuration';
 
 export const createAnApp = () => {
+  const { baseUrl } = getSecret();
   const app = express();
   app.use(express.json());
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +20,7 @@ export const createAnApp = () => {
   );
   app.use(
     cors({
-      origin: ['http://localhost:3000'],
+      origin: [baseUrl],
       optionsSuccessStatus: 200,
       methods: 'GET, PUT, DELETE, POST',
     })
