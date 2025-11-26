@@ -12,5 +12,5 @@ export const getSecret = () => ({
     pass: process.env.SMTP_PASS,
   },
   emailFrom: process.env.EMAIL_FROM,
-  baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+  baseUrl: process.env.BASE_URL || 'http://localhost:5173',
 });
