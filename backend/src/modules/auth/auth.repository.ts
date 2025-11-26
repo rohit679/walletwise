@@ -10,7 +10,7 @@ export const AuthRepository = {
     const user = await UserModel.findOne({ email }).lean();
     return user;
   },
-  async createUser(user: { email: string; name: string; passwordHash: string; settings?: any }) {
+  async createUser(user: { email: string; name: string; password: string; settings?: any }) {
     const doc = await UserModel.create(user);
     return doc.toObject();
   },

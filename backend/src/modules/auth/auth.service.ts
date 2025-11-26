@@ -7,7 +7,7 @@ import { sendEmail } from '../../utils/send-mail';
 import crypto from 'crypto';
 
 export const AuthService = {
-  async register(input: { name: string; email: string; passwordHash: string }) {
+  async register(input: { name: string; email: string; password: string }) {
     const { baseUrl } = getSecret();
     const existing = await AuthRepository.findByEmail(input.email);
     if (existing) {
@@ -27,12 +27,12 @@ export const AuthService = {
     return { user: { name: user.name, email: user.email } };
   },
 
-  async login(input: { email: string; passwordHash: string }) {
+  async login(input: { email: string; password: string }) {
     const user = await AuthRepository.findByEmail(input.email);
     if (!user) {
       throw createError(400, 'User Email does not exist');
     }
-    const ok = await bcrypt.compare(input.passwordHash, user.passwordHash);
+    const ok = await bcrypt.compare(input.password, user.password);
     if (!ok) {
       throw createError(401, 'Invalid credentials');
     }
@@ -85,9 +85,9 @@ export const AuthService = {
       throw createError(400, 'Invalid or expired password reset token');
     }
 
-    const passwordHash = await bcrypt.hash(input.newPassword, 10);
+    const password = await bcrypt.hash(input.newPassword, 10);
     await AuthRepository.updateUser(user._id, {
-      passwordHash,
+      password,
       resetPasswordToken: undefined,
       resetPasswordExpires: undefined,
     });

@@ -15,7 +15,7 @@ export const AuthController = {
       });
     }
     const result = await AuthService.register(
-      parse.data as { name: string; email: string; passwordHash: string }
+      parse.data as { name: string; email: string; password: string }
     );
     res.status(200).send({
       error: false,
@@ -35,7 +35,7 @@ export const AuthController = {
         },
       });
     }
-    const result = await AuthService.login(parse.data as { email: string; passwordHash: string });
+    const result = await AuthService.login(parse.data as { email: string; password: string });
     const options = {
       httpOnly: true,
       secure: true,

@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true, index: true },
-    passwordHash: { type: String, required: true },
+    password: { type: String, required: true },
     name: { type: String, required: true },
     settings: {
       currency: { type: String, default: 'INR' },
@@ -18,9 +18,9 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('passwordHash')) return next();
+  if (!this.isModified('password')) return next();
 
-  this.passwordHash = await bcrypt.hash(this.passwordHash, 10);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
