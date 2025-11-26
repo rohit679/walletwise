@@ -1,13 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import loginIllustration from "../assets/login.png"; // ⬅ your image
+import loginIllustration from "../assets/login.png";
+import TextInput from "../components/form/TextInput";
+import { useLoginForm } from "../hooks/useLoginForm";
 
 export default function LoginPage() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: call your /login API
-    console.log("Login submit");
-  };
+  const {
+    form: {
+      register,
+      handleSubmit,
+      formState: { errors },
+    },
+    onSubmit,
+    serverError,
+    isSubmitting,
+  } = useLoginForm();
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
@@ -40,23 +47,16 @@ export default function LoginPage() {
               </div>
 
               {/* Form */}
-              <form className="space-y-5" onSubmit={handleSubmit}>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-slate-200 mb-1"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
-                    placeholder="you@example.com"
-                  />
-                </div>
+              <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                <TextInput
+                  id="email"
+                  label="Email"
+                  type="email"
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  register={register}
+                  error={errors.email?.message as string}
+                />
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
@@ -73,21 +73,32 @@ export default function LoginPage() {
                       Forgot password?
                     </Link>
                   </div>
-                  <input
+                  <TextInput
                     id="password"
+                    label="" // label handled above
                     type="password"
-                    autoComplete="current-password"
-                    required
-                    className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
                     placeholder="••••••••"
+                    autoComplete="current-password"
+                    register={register}
+                    error={errors.password?.message as string}
                   />
                 </div>
 
+                {serverError && (
+                  <p className="text-xs text-red-400">{serverError}</p>
+                )}
+
                 <button
                   type="submit"
-                  className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-[#4f46e5] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4f46e5]/40 hover:bg-indigo-500 transition-colors"
+                  disabled={isSubmitting}
+                  className={`mt-2 inline-flex w-full items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4f46e5]/40 transition-colors
+                    ${
+                      isSubmitting
+                        ? "bg-indigo-400 cursor-not-allowed"
+                        : "bg-[#4f46e5] hover:bg-indigo-500"
+                    }`}
                 >
-                  Log in
+                  {isSubmitting ? "Logging in..." : "Log in"}
                 </button>
               </form>
 
