@@ -14,7 +14,7 @@ export const AuthService = {
       throw createError(409, 'Email already in use');
     }
     const user = await AuthRepository.createUser(input);
-    await sendEmail({
+    sendEmail({
       to: user.email,
       subject: 'Welcome to WalletWise!',
       template: 'welcome',
@@ -61,7 +61,7 @@ export const AuthService = {
     });
     const resetUrl = `${baseUrl}/reset-password?email=${email}&token=${resetPasswordToken}`;
 
-    await sendEmail({
+    sendEmail({
       to: user.email,
       subject: 'Password Reset Request',
       template: 'forgetPassword',
@@ -92,7 +92,7 @@ export const AuthService = {
       resetPasswordExpires: undefined,
     });
 
-    await sendEmail({
+    sendEmail({
       to: user.email,
       subject: 'Your Password Has Been Reset',
       template: 'resetPassword',
