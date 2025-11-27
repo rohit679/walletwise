@@ -60,7 +60,11 @@ export default function DashboardLayout() {
         </nav>
 
         <div className="px-3 py-3 border-t border-slate-800 text-[11px] text-slate-500">
-          {!collapsed && <>Signed in as <span className="text-slate-300">Admin</span></>}
+          {!collapsed && (
+            <>
+              Signed in as <span className="text-slate-300">Admin</span>
+            </>
+          )}
         </div>
       </aside>
 

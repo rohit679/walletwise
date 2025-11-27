@@ -48,7 +48,7 @@ export function useLoginForm() {
         setIsSubmitting(false);
       }
     },
-    [navigate, showToast]
+    [navigate, showToast],
   );
 
   return {

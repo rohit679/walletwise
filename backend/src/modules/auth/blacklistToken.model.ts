@@ -4,7 +4,7 @@ const blackListTokenSchema = new Schema(
   {
     token: { type: String, required: true, unique: true },
     blacklistedAt: { type: Date, default: Date.now },
-    expiresAt: { type: Date, required: true }
+    expiresAt: { type: Date, required: true },
   },
   { strict: false, timestamps: true }
 );

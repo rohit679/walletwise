@@ -64,9 +64,24 @@ export default function Dashboard() {
               <LineChart data={trendData}>
                 <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
                 <YAxis stroke="#64748b" fontSize={12} />
-                <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
-                <Line type="monotone" dataKey="expenses" stroke="#ef4444" strokeWidth={2} />
-                <Line type="monotone" dataKey="income" stroke="#22c55e" strokeWidth={2} />
+                <Tooltip
+                  contentStyle={{
+                    background: "#020617",
+                    border: "1px solid #1e293b",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="expenses"
+                  stroke="#ef4444"
+                  strokeWidth={2}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="income"
+                  stroke="#22c55e"
+                  strokeWidth={2}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -91,7 +106,10 @@ export default function Dashboard() {
                 </Pie>
                 <Tooltip
                   formatter={(val, name) => [`${val}%`, name]}
-                  contentStyle={{ background: "#020617", border: "1px solid #1e293b" }}
+                  contentStyle={{
+                    background: "#020617",
+                    border: "1px solid #1e293b",
+                  }}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -99,7 +117,10 @@ export default function Dashboard() {
           <ul className="mt-3 space-y-1 text-xs text-slate-400">
             {categoryData.map((c, i) => (
               <li key={c.name}>
-                <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ background: COLORS[i] }} />
+                <span
+                  className="inline-block w-2 h-2 rounded-full mr-2"
+                  style={{ background: COLORS[i] }}
+                />
                 {c.name} — {c.value}%
               </li>
             ))}

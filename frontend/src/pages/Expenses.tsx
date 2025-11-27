@@ -3,7 +3,13 @@ import React from "react";
 
 const dummyExpenses = [
   { id: 1, date: "2025-11-01", category: "Food", amount: 500, note: "Dinner" },
-  { id: 2, date: "2025-11-02", category: "Transport", amount: 200, note: "Cab" },
+  {
+    id: 2,
+    date: "2025-11-02",
+    category: "Transport",
+    amount: 200,
+    note: "Cab",
+  },
 ];
 
 export default function Expenses() {
@@ -38,11 +44,21 @@ export default function Expenses() {
             <table className="min-w-full border-collapse">
               <thead className="bg-slate-900">
                 <tr className="text-slate-400 text-[11px]">
-                  <th className="text-left py-2 px-2 border-b border-slate-800">Date</th>
-                  <th className="text-left py-2 px-2 border-b border-slate-800">Category</th>
-                  <th className="text-left py-2 px-2 border-b border-slate-800">Note</th>
-                  <th className="text-right py-2 px-2 border-b border-slate-800">Amount</th>
-                  <th className="text-right py-2 px-2 border-b border-slate-800">Actions</th>
+                  <th className="text-left py-2 px-2 border-b border-slate-800">
+                    Date
+                  </th>
+                  <th className="text-left py-2 px-2 border-b border-slate-800">
+                    Category
+                  </th>
+                  <th className="text-left py-2 px-2 border-b border-slate-800">
+                    Note
+                  </th>
+                  <th className="text-right py-2 px-2 border-b border-slate-800">
+                    Amount
+                  </th>
+                  <th className="text-right py-2 px-2 border-b border-slate-800">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -54,7 +70,9 @@ export default function Expenses() {
                     <td className="py-2 px-2 text-right">₹ {exp.amount}</td>
                     <td className="py-2 px-2 text-right space-x-2">
                       <button className="text-[11px] text-sky-400">Edit</button>
-                      <button className="text-[11px] text-red-400">Delete</button>
+                      <button className="text-[11px] text-red-400">
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -71,7 +89,10 @@ export default function Expenses() {
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <label className="block mb-1 text-slate-400">Date</label>
-                  <input type="date" className="w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5" />
+                  <input
+                    type="date"
+                    className="w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5"
+                  />
                 </div>
                 <div>
                   <label className="block mb-1 text-slate-400">Category</label>
@@ -98,7 +119,10 @@ export default function Expenses() {
               </div>
               <div>
                 <label className="block mb-1 text-slate-400">Receipt</label>
-                <input type="file" className="w-full text-[11px] text-slate-400" />
+                <input
+                  type="file"
+                  className="w-full text-[11px] text-slate-400"
+                />
               </div>
               <button className="w-full rounded-lg bg-[#4f46e5] py-1.5 text-xs font-semibold hover:bg-indigo-500">
                 Save expense

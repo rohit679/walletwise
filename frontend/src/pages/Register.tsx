@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import registerIllustration from "../assets/register1.png";
 import TextInput from "../components/form/TextInput";
@@ -136,7 +135,6 @@ export default function RegisterPage() {
               </p>
             </div>
           </div>
-
           {/* Illustration side */}
           <div className="relative hidden md:flex items-center justify-center bg-gradient-to-br from-[#4f46e5] to-indigo-500">
             <img

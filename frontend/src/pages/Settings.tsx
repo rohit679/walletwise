@@ -34,11 +34,18 @@ export default function Settings() {
             <p className="text-sm font-medium mb-2">Preferences</p>
             <div className="space-y-2 text-xs text-slate-300">
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="rounded border-slate-600 bg-slate-900" defaultChecked />
+                <input
+                  type="checkbox"
+                  className="rounded border-slate-600 bg-slate-900"
+                  defaultChecked
+                />
                 Show dashboard tips
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="rounded border-slate-600 bg-slate-900" />
+                <input
+                  type="checkbox"
+                  className="rounded border-slate-600 bg-slate-900"
+                />
                 Enable email alerts
               </label>
             </div>
@@ -55,7 +62,9 @@ export default function Settings() {
                 className="inline-flex items-center gap-1 rounded-full bg-slate-800 px-3 py-1"
               >
                 {cat}
-                <button className="text-[10px] text-slate-400 hover:text-red-400">✕</button>
+                <button className="text-[10px] text-slate-400 hover:text-red-400">
+                  ✕
+                </button>
               </span>
             ))}
           </div>

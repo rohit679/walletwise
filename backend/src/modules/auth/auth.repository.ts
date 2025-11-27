@@ -42,5 +42,5 @@ export const AuthRepository = {
   },
   async blacklistToken(token: string, expiresAt: number) {
     await BlackListTokenModel.create({ token, expiresAt: new Date(expiresAt) });
-  }
+  },
 };

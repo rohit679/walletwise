@@ -21,10 +21,7 @@ function TextInputComponent({
 }: Props) {
   return (
     <div className="space-y-1">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-slate-200"
-      >
+      <label htmlFor={id} className="block text-sm font-medium text-slate-200">
         {label}
       </label>
       <input
@@ -37,11 +34,7 @@ function TextInputComponent({
           focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]
           ${error ? "border-red-500" : "border-slate-700"}`}
       />
-      {error && (
-        <p className="text-xs text-red-400 mt-0.5">
-          {error}
-        </p>
-      )}
+      {error && <p className="text-xs text-red-400 mt-0.5">{error}</p>}
     </div>
   );
 }

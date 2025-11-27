@@ -42,7 +42,8 @@ export default function LoginPage() {
                   WalletWise
                 </h1>
                 <p className="mt-1 text-sm text-slate-400">
-                  One stop solution for your expense management in a smarter way.
+                  One stop solution for your expense management in a smarter
+                  way.
                 </p>
               </div>
 

@@ -92,14 +92,10 @@ export const AuthController = {
 
   async logout(req: Request, res: Response) {
     await AuthService.logout((req as any).user);
-    res
-      .status(200)
-      .clearCookie('accessToken')
-      .clearCookie('refreshToken')
-      .send({
-        error: false,
-        message: 'User logged out successfully',
-      });
+    res.status(200).clearCookie('accessToken').clearCookie('refreshToken').send({
+      error: false,
+      message: 'User logged out successfully',
+    });
   },
 
   async refreshToken(req: Request, res: Response) {

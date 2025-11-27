@@ -23,10 +23,18 @@ export default function Income() {
             <table className="min-w-full border-collapse">
               <thead className="bg-slate-900">
                 <tr className="text-slate-400 text-[11px]">
-                  <th className="text-left py-2 px-2 border-b border-slate-800">Date</th>
-                  <th className="text-left py-2 px-2 border-b border-slate-800">Source</th>
-                  <th className="text-right py-2 px-2 border-b border-slate-800">Amount</th>
-                  <th className="text-right py-2 px-2 border-b border-slate-800">Actions</th>
+                  <th className="text-left py-2 px-2 border-b border-slate-800">
+                    Date
+                  </th>
+                  <th className="text-left py-2 px-2 border-b border-slate-800">
+                    Source
+                  </th>
+                  <th className="text-right py-2 px-2 border-b border-slate-800">
+                    Amount
+                  </th>
+                  <th className="text-right py-2 px-2 border-b border-slate-800">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -37,7 +45,9 @@ export default function Income() {
                     <td className="py-2 px-2 text-right">₹ {inc.amount}</td>
                     <td className="py-2 px-2 text-right space-x-2">
                       <button className="text-[11px] text-sky-400">Edit</button>
-                      <button className="text-[11px] text-red-400">Delete</button>
+                      <button className="text-[11px] text-red-400">
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -51,7 +61,10 @@ export default function Income() {
           <form className="space-y-3 text-xs">
             <div>
               <label className="block mb-1 text-slate-400">Date</label>
-              <input type="date" className="w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5" />
+              <input
+                type="date"
+                className="w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5"
+              />
             </div>
             <div>
               <label className="block mb-1 text-slate-400">Source</label>

@@ -23,10 +23,7 @@ export async function registerUser(payload: {
   return data;
 }
 
-export async function loginUser(payload: {
-  email: string;
-  password: string;
-}) {
+export async function loginUser(payload: { email: string; password: string }) {
   const loginUrl = apiEndpoint.login;
   const response = await apiClient.post(loginUrl, payload);
   const { data } = response;

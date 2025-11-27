@@ -24,33 +24,30 @@ export function useRegisterForm() {
     mode: "onBlur",
   });
 
-  const onSubmit = useCallback(
-    async (values: RegisterFormValues) => {
-      setServerError(null);
-      setIsSubmitting(true);
-      setIsSuccess(false);
+  const onSubmit = useCallback(async (values: RegisterFormValues) => {
+    setServerError(null);
+    setIsSubmitting(true);
+    setIsSuccess(false);
 
-      try {
-        await registerUser(values);
-        setIsSuccess(true);
-        showToast({
-          type: "success",
-          message: "Registered successfully. Please login.",
-        });
-        navigate("/login", { replace: true });
-      } catch (err: any) {
-        console.error(err);
-        setServerError(err?.message || "Registration failed");
-        showToast({
-          type: "error",
-          message: err?.message || "Registration failed",
-        });
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    []
-  );
+    try {
+      await registerUser(values);
+      setIsSuccess(true);
+      showToast({
+        type: "success",
+        message: "Registered successfully. Please login.",
+      });
+      navigate("/login", { replace: true });
+    } catch (err: any) {
+      console.error(err);
+      setServerError(err?.message || "Registration failed");
+      showToast({
+        type: "error",
+        message: err?.message || "Registration failed",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, []);
 
   return {
     form,

@@ -48,17 +48,21 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      <div className="
+      <div
+        className="
         w-full max-w-5xl bg-slate-900 border border-slate-800 rounded-3xl 
         shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2
-      ">
+      "
+      >
         {/* Left: Form */}
         <div className="p-8 md:p-10 flex items-center justify-center">
           <div className="w-full max-w-sm">
             {/* Branding */}
             <div className="mb-8 text-center md:text-left">
-              <div className="inline-flex items-center justify-center w-12 h-12 
-                rounded-2xl bg-[#4f46e5]/10 border border-[#4f46e5]/40 mb-3">
+              <div
+                className="inline-flex items-center justify-center w-12 h-12 
+                rounded-2xl bg-[#4f46e5]/10 border border-[#4f46e5]/40 mb-3"
+              >
                 <span className="text-2xl font-bold text-[#4f46e5]">₩</span>
               </div>
               <h1 className="text-2xl font-semibold text-white">
@@ -111,16 +115,10 @@ export default function ResetPasswordPage() {
                 />
               </div>
 
-              {error && (
-                <p className="text-xs text-red-400 mt-1">
-                  {error}
-                </p>
-              )}
+              {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
 
               {success && (
-                <p className="text-xs text-emerald-400 mt-1">
-                  {success}
-                </p>
+                <p className="text-xs text-emerald-400 mt-1">{success}</p>
               )}
 
               <button
@@ -137,7 +135,10 @@ export default function ResetPasswordPage() {
             {/* Footer */}
             <p className="mt-6 text-center text-xs text-slate-400">
               Remember your password?{" "}
-              <Link to="/login" className="text-[#4f46e5] hover:text-indigo-300">
+              <Link
+                to="/login"
+                className="text-[#4f46e5] hover:text-indigo-300"
+              >
                 Back to login
               </Link>
             </p>

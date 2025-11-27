@@ -11,24 +11,29 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      <div className="
+      <div
+        className="
         w-full max-w-5xl bg-slate-900 border border-slate-800 rounded-3xl 
         shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2
-      ">
+      "
+      >
         {/* Left: Form */}
         <div className="p-8 md:p-10 flex items-center justify-center">
           <div className="w-full max-w-sm">
             {/* Branding */}
             <div className="mb-8 text-center md:text-left">
-              <div className="inline-flex items-center justify-center w-12 h-12 
-                rounded-2xl bg-[#4f46e5]/10 border border-[#4f46e5]/40 mb-3">
+              <div
+                className="inline-flex items-center justify-center w-12 h-12 
+                rounded-2xl bg-[#4f46e5]/10 border border-[#4f46e5]/40 mb-3"
+              >
                 <span className="text-2xl font-bold text-[#4f46e5]">₩</span>
               </div>
               <h1 className="text-2xl font-semibold text-white">
                 Forgot your password?
               </h1>
               <p className="mt-1 text-sm text-slate-400">
-                Enter the email you use for WalletWise and we&apos;ll send you a link to reset your password.
+                Enter the email you use for WalletWise and we&apos;ll send you a
+                link to reset your password.
               </p>
             </div>
 

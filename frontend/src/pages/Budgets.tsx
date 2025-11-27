@@ -16,7 +16,11 @@ export default function Budgets() {
         {budgets.map((b) => {
           const pct = Math.min(100, Math.round((b.spent / b.limit) * 100));
           const barColor =
-            pct > 90 ? "bg-red-500" : pct > 75 ? "bg-orange-400" : "bg-emerald-500";
+            pct > 90
+              ? "bg-red-500"
+              : pct > 75
+                ? "bg-orange-400"
+                : "bg-emerald-500";
 
           return (
             <div key={b.id} className="space-y-2">

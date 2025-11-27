@@ -105,7 +105,7 @@ export const AuthService = {
   },
 
   async logout(user: any) {
-    const { id, token  } = user as any;
+    const { id, token } = user as any;
     const decodedToken: any = jwt.decode(token);
     const expiresAt = decodedToken.exp * 1000;
     await AuthRepository.blacklistToken(token, expiresAt);
