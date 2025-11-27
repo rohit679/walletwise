@@ -39,3 +39,31 @@ export async function loginUser(payload: { email: string; password: string }) {
 
   return data;
 }
+
+export async function forgotPassword(payload: { email: string }) {
+  const forgotPasswordUrl = apiEndpoint.forgotPassword;
+  const response = await apiClient.post(forgotPasswordUrl, payload);
+  const { data } = response;
+
+  if (!data || data.error) {
+    throw new Error(data?.message || "Forgot password request failed");
+  }
+
+  return data;
+}
+
+export async function resetPassword(payload: {
+  email: string;
+  token: string;
+  newPassword: string;
+}) {
+  const resetPasswordUrl = apiEndpoint.resetPassword;
+  const response = await apiClient.post(resetPasswordUrl, payload);
+  const { data } = response;
+
+  if (!data || data.error) {
+    throw new Error(data?.message || "Reset password request failed");
+  }
+
+  return data;
+}

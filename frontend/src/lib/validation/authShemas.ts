@@ -27,3 +27,26 @@ export const loginSchema = yup.object({
     .required("Email is required"),
   password: yup.string().required("Password is required"),
 });
+
+export const forgotPasswordSchema = yup.object({
+  email: yup
+    .string()
+    .trim()
+    .email("Invalid email")
+    .required("Email is required"),
+});
+
+export const resetPasswordSchema = yup.object({
+  newPassword: yup
+    .string()
+    .min(8, "Minimum 8 characters")
+    .matches(/[A-Z]/, "Must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Must contain at least one number")
+    .required("New password is required"),
+  confirmPassword: yup
+    .string()
+    .min(8, "Minimum 8 characters")
+    .matches(/[A-Z]/, "Must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Must contain at least one number")
+    .required("New password is required"),
+});
