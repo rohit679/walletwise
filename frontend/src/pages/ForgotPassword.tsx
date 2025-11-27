@@ -33,12 +33,13 @@ export default function ForgotPasswordPage() {
                 Forgot your password?
               </h1>
               <p className="mt-1 text-sm text-slate-400">
-                Enter the email you use for WalletWise and we&apos;ll send you a link to reset it.
+                Enter the email you use for WalletWise and we&apos;ll send you a
+                link to reset it.
               </p>
             </div>
 
             {/* Form */}
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>         
+            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <TextInput
                 id="email"
                 label="Email"

@@ -18,7 +18,7 @@ export function useResetPasswordForm() {
   const email = searchParams.get("email");
   const { showToast } = useToast();
   const navigate = useNavigate();
-  
+
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
